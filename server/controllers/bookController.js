@@ -18,7 +18,7 @@ async function getAllBooks(req, res, next) {
   } catch (error) {
     logger.error(`bookController getAllBooks failed: ${error.message}`)
     logger.error(error.stack)
-    next(createError(500, error.message))
+    next(createError(500, 'Could not fetch books'))
   }
 }
 
@@ -34,11 +34,11 @@ async function addBook(req, res, next) {
   const bookData = new Book(newBook)
   try {
     await bookData.save()
-    res.status(200).json(bookData)
+    res.status(200).json({ bookData: bookData, message: "Added book succesfully!"})
   } catch (error) {
     logger.error(`bookController addBook failed: ${error.message}`)
     logger.error(error.stack)
-    next(createError(500, error.message))
+    next(createError(500, 'Add failed'))
   }
 }
 
@@ -59,11 +59,11 @@ async function updateBook(req, res, next) {
   }
   try {
     const updatedBook = await Book.findByIdAndUpdate(_id, bookData, { new: true })
-    res.status(200).json(updatedBook)
+    res.status(200).json({ updatedBook: updatedBook, message: "Updated book succesfully!"})
   } catch (error) {
     logger.error(`bookController updateBook failed: ${error.message}`)
     logger.error(error.stack)
-    next(createError(500, error.message))
+    next(createError(500, 'Update failed'))
   }
 }
 
@@ -82,11 +82,11 @@ async function deleteBook(req, res, next) {
   }
   try {
     await Book.findByIdAndRemove(_id)
-    res.status(200).json({ id: _id })
+    res.status(200).json({ id: _id, message: "Removed book succesfully!" })
   } catch (error) {
     logger.error(`bookController deleteBook failed: ${error.message}`)
     logger.error(error.stack)
-    next(createError(500, error.message))
+    next(createError(500, 'Delete failed'))
   }
 }
 

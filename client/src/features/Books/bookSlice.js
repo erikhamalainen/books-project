@@ -53,9 +53,9 @@ const bookSlice = createSlice({
       state.error = null;
     });
     builder.addCase(addBook.fulfilled, (state, action) => {
-      const newBook = { ...action.payload };
-      if (newBook) {
-        state.allBooks.unshift(newBook);
+      const { bookData } = action.payload;
+      if (bookData) {
+        state.allBooks.unshift(bookData);
       }
       state.error = null;
       state.loading = false;
@@ -69,7 +69,7 @@ const bookSlice = createSlice({
       state.error = null;
     });
     builder.addCase(updateBook.fulfilled, (state, action) => {
-      const updatedBook = { ...action.payload };
+      const { updatedBook } = action.payload;
       if (updatedBook) {
         const bookIndex = state.allBooks.findIndex((book) => book._id === updatedBook._id);
         state.allBooks[bookIndex] = updatedBook;

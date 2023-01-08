@@ -6,7 +6,9 @@ import store from './app/store';
 import App from './App';
 import { injectStore } from './api/requests';
 
+// Redux store for non-component files
 injectStore(store);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
