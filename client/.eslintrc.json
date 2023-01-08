@@ -5,16 +5,12 @@
     "es6": true, // Enable all ECMAScript 6 features except for modules.
     "node": true // Defines things like process.env when generating through node
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "airbnb"],
   "parser": "@babel/eslint-parser", // Uses babel-eslint transforms.
   "parserOptions": {
     "babelOptions": {
-        "presets": ["@babel/preset-react"]
-     },
+      "presets": ["@babel/preset-react"]
+    },
     "requireConfigFile": false,
     "ecmaFeatures": {
       "jsx": true
@@ -22,17 +18,15 @@
     "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
     "sourceType": "module" // Allows for the use of imports
   },
-  "plugins": [
-    "jsx-a11y",
-    "import"
-    ],
+  "plugins": ["jsx-a11y", "import"],
   "root": true, // For configuration cascading.
   "rules": {
     "react/prop-types": "off",
     "no-unused-vars": "warn",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "no-prototype-builtins": "warn"
+    "no-prototype-builtins": "warn",
+    "linebreak-style": 0
   },
   "settings": {
     "react": {

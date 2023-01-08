@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "cd server && npm start",
     "start-client": "cd client && npm start",
-    "first-install": "npm install && cd server && npm install && cd ../client && npm install",
+    "first-install": "npm ci && cd server && npm ci && cd ../client && npm ci",
     "dev": "npm-run-all -p start-server start-client"
   },
   "repository": {

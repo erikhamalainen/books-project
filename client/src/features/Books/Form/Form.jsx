@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import { TextField, Button, Typography, Paper } from '@mui/material'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import { useSelector, useDispatch } from 'react-redux'
-import { selectBooks, updateBook, deleteBook } from '../bookSlice'
-import { addBook } from '../bookSlice'
+/* eslint-disable no-underscore-dangle */
+import React, { useState, useEffect } from 'react';
+import {
+  TextField, Button, Typography, Paper,
+} from '@mui/material';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectBooks, updateBook, deleteBook, addBook,
+} from '../bookSlice';
 
 export default function Form({ currentId, setCurrentId }) {
-  const [bookData, setBookData] = useState({ title: '', author: '', description: '' })
-  const dispatch = useDispatch()
-  const selectedBookData = useSelector(selectBooks).find((book) => book._id === currentId)
+  const [bookData, setBookData] = useState({ title: '', author: '', description: '' });
+  const dispatch = useDispatch();
+  const selectedBookData = useSelector(selectBooks).find((book) => book._id === currentId);
+
+  const clear = () => {
+    setCurrentId(null);
+    setBookData({ title: '', author: '', description: '' });
+  };
 
   useEffect(() => {
     if (selectedBookData) {
@@ -17,15 +26,21 @@ export default function Form({ currentId, setCurrentId }) {
         title: selectedBookData.title,
         author: selectedBookData.author,
         description: selectedBookData.description,
-      })
+      });
     }
-  }, [selectedBookData])
+  }, [selectedBookData]);
+
+  useEffect(() => {
+    if (currentId === null) {
+      clear();
+    }
+  }, [currentId]);
 
   const validationSchema = yup.object({
     title: yup.string('Enter Title').required('Title is required'),
     author: yup.string('Enter author'),
     description: yup.string('Enter description').max(500, 'Description can not be longer than 500 merkkiä'),
-  })
+  });
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -34,39 +49,45 @@ export default function Form({ currentId, setCurrentId }) {
       author: bookData.author ?? '',
       description: bookData.description ?? '',
     },
-    validationSchema: validationSchema,
-    onSubmit: (values, { setSubmitting }) => {
+    validationSchema,
+    onSubmit: (values, actions) => {
       if (currentId) {
-        dispatch(updateBook({ currentId, values }))
-        setSubmitting(false)
+        dispatch(updateBook({ currentId, values }));
+        actions.setSubmitting(false);
       } else {
-        dispatch(addBook(values))
-        setSubmitting(false)
+        dispatch(addBook(values));
+        actions.setSubmitting(false);
       }
-      clear()
+      clear();
     },
-  })
-
-  const clear = () => {
-    setCurrentId(null)
-    setBookData({ title: '', author: '', description: '' })
-  }
+  });
 
   const handleDelete = (id) => {
-    dispatch(deleteBook(id))
-    clear()
-  }
+    dispatch(deleteBook(id));
+    clear();
+  };
 
-  //TODO: Save nappi enabloituu KUN valittu, ja jos checkboxi pois niin menee takaisin disabled tilaan
   return (
-    <Paper className="paper">
-      <form className="root form" onSubmit={formik.handleSubmit}>
-        <Typography variant="h6">{currentId ? 'Updating a book' : 'Creating a book'}</Typography>
+    <Paper>
+      <form onSubmit={formik.handleSubmit}>
+        <Typography
+          sx={{
+            margin: '5px',
+          }}
+          variant="h6"
+        >
+          {currentId ? 'Updating a book' : 'Creating a book'}
+        </Typography>
         <TextField
           name="title"
           variant="outlined"
           label="Title"
-          fullWidth
+          margin="dense"
+          sx={{
+            margin: '5px',
+            width: '90%',
+          }}
+          required
           value={formik.values.title}
           onChange={formik.handleChange}
           error={formik.touched.title && Boolean(formik.errors.title)}
@@ -76,7 +97,11 @@ export default function Form({ currentId, setCurrentId }) {
           name="author"
           variant="outlined"
           label="Author"
-          fullWidth
+          margin="dense"
+          sx={{
+            margin: '5px',
+            width: '90%',
+          }}
           value={formik.values.author}
           onChange={formik.handleChange}
           error={formik.touched.author && Boolean(formik.errors.author)}
@@ -86,20 +111,42 @@ export default function Form({ currentId, setCurrentId }) {
           name="description"
           variant="outlined"
           label="Description"
-          fullWidth
+          margin="dense"
+          sx={{
+            margin: '5px',
+            width: '90%',
+          }}
+          multiline
           value={formik.values.description}
           onChange={formik.handleChange}
           error={formik.touched.description && Boolean(formik.errors.description)}
           helperText={formik.touched.description && formik.errors.description}
         />
-        <Button className="save-button" variant="contained" size="medium" type="submit">
-          Save as new
+        <Button
+          sx={{
+            margin: '5px',
+          }}
+          variant="contained"
+          size="medium"
+          type="submit"
+        >
+          Save new
         </Button>
-        <Button className="update-button" disabled={!currentId} variant="contained" size="medium" type="submit">
+        <Button
+          sx={{
+            margin: '5px',
+          }}
+          disabled={!currentId || !formik.dirty}
+          variant="contained"
+          size="medium"
+          type="submit"
+        >
           Save
         </Button>
         <Button
-          className="delete-button"
+          sx={{
+            margin: '5px',
+          }}
           disabled={!currentId}
           variant="contained"
           size="medium"
@@ -110,5 +157,5 @@ export default function Form({ currentId, setCurrentId }) {
         </Button>
       </form>
     </Paper>
-  )
+  );
 }

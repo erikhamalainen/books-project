@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import createError, { HttpError } from 'http-errors'
 import logger from './util/logger.js'
 import cors from 'cors'
+import helmet from 'helmet'
 import bookRoutes from './routes/bookRoutes.js'
 import dotenv from 'dotenv'
 
@@ -11,9 +12,10 @@ dotenv.config()
 
 const app = express()
 
+app.use(helmet())
+app.use(cors())
 app.use(bodyParser.json({ limit: '10mb' }))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
-app.use(cors())
 
 app.use('/books', bookRoutes)
 
