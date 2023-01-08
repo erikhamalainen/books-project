@@ -57,6 +57,8 @@ Client variables:
 REACT_APP_API_URL= http://localhost:5000
 ```
 
+Add these to the .env files on place of the placeholders and save the files.
+
 Now you are all set for running the program.
 
 
