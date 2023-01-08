@@ -43,28 +43,14 @@ client\.env.example
 ```
 Change the name of these files into just .env `.env.example -> .env`. 
 
-**Note: this is bad practice, but for this project the variables are listed under here for availability purposes:**
-
-Server variables:
-```
-PORT= 5000
-DB_USER= books-cluster
-DB_PASS= 5KoRbNe6MmpiMAUr
-```
-
-Client variables:
-```
-REACT_APP_API_URL= http://localhost:5000
-```
-
-Add these to the .env files on place of the placeholders and save the files.
+Add the provided environment variables to the .env files on place of the placeholders and save the files.
 
 Now you are all set for running the program.
 
 
 ### Executing program
 
-* Run the program from command line by running command
+Run the program from command line by running command
 ```
 npm run dev
 ```
