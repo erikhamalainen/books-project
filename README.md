@@ -56,3 +56,16 @@ npm run dev
 ```
 
 The program should run, and open it in localhost:3000 automatically on your browser. You should see the headerbar, form, and booktable, without any errors.
+
+### Testing
+
+Although there isn't a lot to test, I've created a few unit tests with Jest on the frontend-side to test sorting functions. They can be ran by going into the client folder
+```
+cd client
+```
+
+and running command
+
+```
+npm test
+```
