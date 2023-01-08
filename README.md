@@ -10,13 +10,27 @@ Single-page app made by using ReactJS on frontend and NodeJS with express on the
 
 ### Dependencies
 
-You need to have NodeJS installed in order to run this program. You will also need git to clone the repository to your computer. You will also need a modern web browser (such as [Google Chrome](https://www.google.com/intl/fi_fi/chrome/)) to open the page. You will also need an internet connection to connect to the database in the cloud.
+
+* NodeJS installed in order to run this program. 
+
+* Python v3.7, v3.8, v3.9, or v3.10 (for example from Microsoft Store if on Windows). 
+
+* **(APPLIES ONLY TO WINDOWS)** Latest [Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) with "Desktop development with C++" workload. Underneath you will find a picture to see selections for Windows 10. If you are running Windows 11, you need to select the Windows 11 SDK.  ![image](https://user-images.githubusercontent.com/50096393/211222302-a66f3433-850e-4b8b-96ef-7f50d5e05e70.png)
+
+* The reasoning for Python and Visual Studio comes from [node-gyp](https://github.com/nodejs/node-gyp), which npm utilizes on installation of clientside modules. For windows, you can refer to [here](https://github.com/nodejs/node-gyp#on-windows) for a guide on how to do these same steps as just listed but **NOTE: YOU NEED TO SET THE NPM CONFIG VERSION OF MSVS TO 2022** as so `npm config set msvs_version 2022` instead of the `npm config set msvs_version 2017` listed on the link provided. If you use other OS than Windows, refer to the [node-gyp](https://github.com/nodejs/node-gyp) guide for your specific OS.
+
+
+* git to clone the repository to your computer.
+
+* modern web browser (such as [Google Chrome](https://www.google.com/intl/fi_fi/chrome/)) to open the page. 
+
+* internet connection to connect to the database in the cloud.
 
 Download NodeJS [here](https://nodejs.org/en/).
 Download Git [here](https://git-scm.com/).
 
 ### Installing
-After installing NodeJS and Git, you can clone the project and start installing it on your computer. Open up a command-line tool (such as command prompt or bash).
+After installing dependencies, you can clone the project and start installing it on your computer. Open up a command-line tool (such as command prompt or bash).
 
 First, clone the repository into your desired location on your computer by using 
 ```
