@@ -38,7 +38,7 @@ app.use((error, _req, res, _next) => {
   res.status(statusCode).json({ message })
 })
 
-const DB_URL = process.env.DB_URL
+const DB_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@books-cluster.lskfzvg.mongodb.net/?retryWrites=true&w=majority`
 const PORT = process.env.PORT || 5000
 mongoose.set('strictQuery', false)
 mongoose
