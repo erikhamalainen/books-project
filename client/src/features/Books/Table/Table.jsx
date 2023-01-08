@@ -6,7 +6,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
   Paper,
   Button,
@@ -14,14 +13,29 @@ import {
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectBooks, selectLoading } from '../bookSlice';
+import EnhancedTableHead from '../../../components/EnhancedTableHead/EnhancedTableHead';
+import { getComparator } from '../../../util/bookTableSorters';
+
+const headCells = [
+  {
+    id: 'title',
+    label: 'Title',
+  },
+  {
+    id: 'author',
+    label: 'Author',
+  },
+];
 
 export default function BooksTable({ currentId, setCurrentId }) {
   const books = useSelector(selectBooks);
   const loading = useSelector(selectLoading);
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('title');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
@@ -38,6 +52,12 @@ export default function BooksTable({ currentId, setCurrentId }) {
     setCurrentId(null);
   };
 
+  const handleRequestSort = (_, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
 
   return loading ? (
@@ -46,14 +66,14 @@ export default function BooksTable({ currentId, setCurrentId }) {
     <>
       <TableContainer sx={{ marginY: '6px' }} component={Paper}>
         <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell variant="head">Title</TableCell>
-              <TableCell align="left">Author</TableCell>
-            </TableRow>
-          </TableHead>
+          <EnhancedTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headCells={headCells}
+          />
           <TableBody>
-            {books
+            {books.slice().sort(getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((book) => (
                 <TableRow

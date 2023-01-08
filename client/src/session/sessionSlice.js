@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   error: null,
+  message: null,
 };
 
 export const sessionSlice = createSlice({
@@ -12,11 +13,16 @@ export const sessionSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setMessage: (state, action) => {
+      state.message = action.payload;
+    },
   },
 });
 
-export const { setError } = sessionSlice.actions;
+export const { setError, setMessage } = sessionSlice.actions;
 
 export const selectError = (state) => state.session.error;
+
+export const selectMessage = (state) => state.session.message;
 
 export default sessionSlice.reducer;

@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button } from '@mui/material';
-import { selectError, setError } from '../../session/sessionSlice';
+import {
+  selectError, setError, selectMessage, setMessage,
+} from '../../session/sessionSlice';
 
 export default function TopAlert() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
+  const message = useSelector(selectMessage);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  useEffect(() => {
+    setErrorMessage(error);
+  }, [error]);
+
+  useEffect(() => {
+    setSuccessMessage(message);
+  }, [message]);
+
   const closeAlert = () => {
-    dispatch(setError(null));
+    if (message) {
+      dispatch(setMessage(null));
+    } else {
+      dispatch(setError(null));
+    }
   };
+
   return (
-    error && (
+    (errorMessage || successMessage) && (
     <Alert
-      severity="error"
+      severity={errorMessage ? 'error' : 'success'}
       action={(
         <Button color="inherit" size="small" onClick={closeAlert}>
           X
         </Button>
       )}
     >
-      {error}
+      {(errorMessage || successMessage)}
     </Alert>
     )
   );

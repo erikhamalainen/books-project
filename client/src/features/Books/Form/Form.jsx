@@ -15,11 +15,6 @@ export default function Form({ currentId, setCurrentId }) {
   const dispatch = useDispatch();
   const selectedBookData = useSelector(selectBooks).find((book) => book._id === currentId);
 
-  const clear = () => {
-    setCurrentId(null);
-    setBookData({ title: '', author: '', description: '' });
-  };
-
   useEffect(() => {
     if (selectedBookData) {
       setBookData({
@@ -30,6 +25,11 @@ export default function Form({ currentId, setCurrentId }) {
     }
   }, [selectedBookData]);
 
+  const clear = () => {
+    setCurrentId(null);
+    setBookData({ title: '', author: '', description: '' });
+  };
+
   useEffect(() => {
     if (currentId === null) {
       clear();
@@ -37,9 +37,9 @@ export default function Form({ currentId, setCurrentId }) {
   }, [currentId]);
 
   const validationSchema = yup.object({
-    title: yup.string('Enter Title').required('Title is required'),
-    author: yup.string('Enter author'),
-    description: yup.string('Enter description').max(500, 'Description can not be longer than 500 merkkiä'),
+    title: yup.string().required('Title is required'),
+    author: yup.string(),
+    description: yup.string(),
   });
 
   const formik = useFormik({
@@ -50,15 +50,17 @@ export default function Form({ currentId, setCurrentId }) {
       description: bookData.description ?? '',
     },
     validationSchema,
-    onSubmit: (values, actions) => {
-      if (currentId) {
+    onSubmit: (values, { setSubmitting }) => {
+      const updating = document.activeElement.dataset.flag === 'update';
+      if (currentId && updating) {
         dispatch(updateBook({ currentId, values }));
-        actions.setSubmitting(false);
+        setSubmitting(false);
       } else {
         dispatch(addBook(values));
-        actions.setSubmitting(false);
+        setSubmitting(false);
       }
-      clear();
+      setCurrentId(null);
+      formik.resetForm();
     },
   });
 
@@ -129,6 +131,7 @@ export default function Form({ currentId, setCurrentId }) {
           variant="contained"
           size="medium"
           type="submit"
+          data-flag="create"
         >
           Save new
         </Button>
@@ -140,6 +143,7 @@ export default function Form({ currentId, setCurrentId }) {
           variant="contained"
           size="medium"
           type="submit"
+          data-flag="update"
         >
           Save
         </Button>

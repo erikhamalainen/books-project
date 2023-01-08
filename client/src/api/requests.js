@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setError } from '../session/sessionSlice';
+import { setError, setMessage } from '../session/sessionSlice';
 
 const config = {
   baseURL: process.env.REACT_APP_API_URL,
@@ -15,7 +15,11 @@ export const injectStore = (_store) => {
 };
 
 api.interceptors.response.use(
-  (response) => response, // for http status 2xx
+  (response) => {
+    // for http status 2xx
+    store.dispatch(setMessage(response?.data?.message));
+    return response;
+  }, // for http status 2xx
   (error) => {
     // For http status not 2xx
     let errorMsg = error?.response?.data?.message;
