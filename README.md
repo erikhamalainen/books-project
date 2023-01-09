@@ -47,7 +47,7 @@ Once in the repository, run command
 npm run first-install
 ```
 to install the needed dependencies for the project to work.
-You might encounter `6 high severity vulnerabilities``warning after installing is complete in the command logs. Do not worry, this is due to `npm audit` and how it works, there are no actual vulnerabilities. You can read more [here](https://overreacted.io/npm-audit-broken-by-design/)
+You might encounter `6 high severity vulnerabilities` warning after installing is complete in the command logs. Do not worry, this is due to `npm audit` and how it works, there are no actual vulnerabilities. You can read more [here](https://overreacted.io/npm-audit-broken-by-design/)
 
 Next up you need to set up environment variables so the program works as intended. You need to locate .env.example files from both client and server folders. They are located at:
 ```
