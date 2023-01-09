@@ -10,8 +10,7 @@ Single-page app made by using ReactJS on frontend and NodeJS with express on the
 
 ### Dependencies
 
-
-* NodeJS installed in order to run this program. 
+* NodeJS installed in order to run this program. Download NodeJS [here](https://nodejs.org/en/).
 
 * Python v3.7, v3.8, v3.9, or v3.10 (for example from Microsoft Store if on Windows). 
 
@@ -20,14 +19,11 @@ Single-page app made by using ReactJS on frontend and NodeJS with express on the
 * The reasoning for Python and Visual Studio comes from [node-gyp](https://github.com/nodejs/node-gyp), which npm utilizes on installation of clientside modules. For windows, you can refer to [here](https://github.com/nodejs/node-gyp#on-windows) for a guide on how to do these same steps as just listed but **NOTE: YOU NEED TO SET THE NPM CONFIG VERSION OF MSVS TO 2022** as so `npm config set msvs_version 2022` instead of the `npm config set msvs_version 2017` listed on the link provided. If you use other OS than Windows, refer to the [node-gyp](https://github.com/nodejs/node-gyp) guide for your specific OS.
 
 
-* git to clone the repository to your computer.
+* git to clone the repository to your computer. Download Git [here](https://git-scm.com/).
 
 * modern web browser (such as [Google Chrome](https://www.google.com/intl/fi_fi/chrome/)) to open the page. 
 
-* internet connection to connect to the database in the cloud.
-
-Download NodeJS [here](https://nodejs.org/en/).
-Download Git [here](https://git-scm.com/).
+* Internet connection (you can run the app without, but will get `Network error` on load since you can't fetch the books from database).
 
 ### Installing
 After installing dependencies, you can clone the project and start installing it on your computer. Open up a command-line tool (such as command prompt or bash).
@@ -49,6 +45,7 @@ Once in the repository, run command
 npm run first-install
 ```
 to install the needed dependencies for the project to work.
+You might encounter `6 high severity vulnerabilities``warning after installing is complete in the command logs. Do not worry, this is due to `npm audit` and how it works, there are no actual vulnerabilities. You can read more [here](https://overreacted.io/npm-audit-broken-by-design/)
 
 Next up you need to set up environment variables so the program works as intended. You need to locate .env.example files from both client and server folders. They are located at:
 ```
@@ -58,6 +55,17 @@ client\.env.example
 Change the name of these files into just .env `.env.example -> .env`. 
 
 Add the provided environment variables to the .env files on place of the placeholders and save the files.
+For `server\.env`
+```
+PORT
+DB_USER
+DB_PASS
+```
+
+and for `client\.env`
+```
+REACT_APP_API_URL
+```
 
 Now you are all set for running the program.
 
