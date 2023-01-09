@@ -4,7 +4,7 @@ A single-page app for saving, editing and deleting books and relative informatio
 
 ## Description
 
-Single-page app made by using ReactJS on frontend and NodeJS with express on the backend. MongoDB Atlas is used as a database to store the information. Winston library is used for logging. Tests are made using the Jest-framework. On the page you can add, modify, delete books with the form provided, as well as browse existing ones on the table provided.
+Single-page app made by using ReactJS on frontend and NodeJS with express on the backend. MongoDB Atlas is used as a database on the cloud to store the information. Winston library is used for logging. Tests are made using the Jest-framework. On the page you can add, modify, delete books with the form provided, as well as browse existing ones on the table provided.
 
 ## Getting Started
 
