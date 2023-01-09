@@ -8,6 +8,8 @@ Single-page app made by using ReactJS on frontend and NodeJS with express on the
 
 ## Getting Started
 
+Please read through each step listed below to ensure that you can get the program running.
+
 ### Dependencies
 
 * NodeJS installed in order to run this program. Download NodeJS [here](https://nodejs.org/en/).
