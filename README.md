@@ -12,11 +12,11 @@ Please read through each step listed below to ensure that you can get the progra
 
 ### Dependencies
 
-* NodeJS installed in order to run this program. Download NodeJS [here](https://nodejs.org/en/).
+* NodeJS installed in order to run this program. Download NodeJS [here](https://nodejs.org/en/). (Prefer to install necessary tools from the checkbox in the installer)
 
 * Python v3.7, v3.8, v3.9, or v3.10 (for example from Microsoft Store if on Windows). 
 
-* **(APPLIES ONLY TO WINDOWS)** Latest [Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) with "Desktop development with C++" workload. Underneath you will find a picture to see selections for Windows 10. If you are running Windows 11, you need to select the Windows 11 SDK.  ![image](https://user-images.githubusercontent.com/50096393/211222302-a66f3433-850e-4b8b-96ef-7f50d5e05e70.png)
+* **(APPLIES ONLY TO WINDOWS AND HAVING NOT CHECKED  'Automatically install the necessary tools' FROM NODEJS INSTALLER)** Latest [Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools) with "Desktop development with C++" workload. Underneath you will find a picture to see selections for Windows 10. If you are running Windows 11, you need to select the Windows 11 SDK.  ![image](https://user-images.githubusercontent.com/50096393/211222302-a66f3433-850e-4b8b-96ef-7f50d5e05e70.png)
 
 * The reasoning for Python and Visual Studio comes from [node-gyp](https://github.com/nodejs/node-gyp), which npm utilizes to compile native addon modules for Node.js. For windows, you can refer to [here](https://github.com/nodejs/node-gyp#on-windows) for a guide on how to do these same steps as just listed but **NOTE: YOU NEED TO SET THE NPM CONFIG VERSION OF MSVS TO 2022** as so `npm config set msvs_version 2022` instead of the `npm config set msvs_version 2017` listed on the link provided. If you use other OS than Windows, refer to the [node-gyp](https://github.com/nodejs/node-gyp) guide for your specific OS.
 
